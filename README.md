@@ -44,6 +44,8 @@ Notes:
   
   For purging the table manually use: http://0.0.0.0:5001/purge_cost_counter
 
+  To purge the service containers on dev machine use: scripts/delete-docker-images.sh
+
   
 
 
