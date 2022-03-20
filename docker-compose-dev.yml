@@ -1,0 +1,34 @@
+version: '3'
+services:
+  api-service:
+    build: ./
+    volumes:
+    - ./:/usr/src/app/
+    ports:
+    - "5001:5001"
+    environment:
+      PORT: 5001
+      FLASK_DEBUG: 1
+      ENV_TYPE: "dev"
+    links:
+      - "redis:alpine"
+      - "dynamodb"
+    depends_on:
+      - redis
+      - dynamodb
+  redis:
+    image: "redis:alpine"
+    command: redis-server --requirepass sOmE_sEcUrE_pAsS
+    ports:
+      - "6379:6379"
+    volumes:
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_REPLICATION_MODE=master
+  dynamodb:
+    image: amazon/dynamodb-local
+    hostname: dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"

@@ -1,0 +1,4 @@
+/redis.conf
+/redis-data
+/*.iml
+/.idea/
