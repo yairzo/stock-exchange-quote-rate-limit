@@ -5,10 +5,8 @@ from datetime import datetime, timedelta
 import redis
 from boto3.dynamodb.conditions import Key
 from flask import Flask, jsonify, request, Response
-from flask_httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
-auth = HTTPBasicAuth()
 redis_client = None
 dynamodb_client = None
 cost_counter_table = None
